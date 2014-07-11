@@ -7,7 +7,11 @@ def main():
     # step 1: generate candidate chargers
     # setp 2: generate sensors
     # step 3: apply solution in config.py
-    pass
+
+
+    print "============================================="
+    pprint(args)
+    print "============================================="
 
 if __name__ == '__main__':
     main()
