@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from math import *
-import config
+from config import args
 
-# make sure division can get float anser
+# make sure division can get float answer
 from __future__ import division
 
 """
@@ -19,9 +19,9 @@ def distance(c, s):
 power of c(x, y)
 """
 def power(h):
-    p_min = config['p_min']
-    p_max = config['p_max']
-    h_max = config['h_max']
+    p_min = args['p_min']
+    p_max = args['p_max']
+    h_max = args['h_max']
 
     return p_min + float(h)/h_max * (p_max-p_min)
 
@@ -30,9 +30,9 @@ def power(h):
 max charging distance of c(x, y)
 """
 def func_D(h):
-    alpha = config['alpha']
-    beta = config['beta']
-    p_th = config['p_th']
+    alpha = args['alpha']
+    beta = args['beta']
+    p_th = args['p_th']
 
     return sqrt(alpha / p_th * power(h)) - beta
 
@@ -44,8 +44,8 @@ def power_charged(c, s, h):
     dis = distance(c, s)
 
     if dis <= max_d:
-        alpha = config['alpha']
-        beta = config['beta']
+        alpha = args['alpha']
+        beta = args['beta']
 
         return alpha/((distance(c, s)+beta)**2) * power(h)
     else:
@@ -53,5 +53,13 @@ def power_charged(c, s, h):
 
 
 """
-sensor received power
+sensor s(x, y) with power consumption p received power from chargers[(x, y), (x, y), ...]
 """
+def power_received(s, p, chargers, h_list):
+    return sum([min(power_charged(c, s, h), p) for (c, h) in zip(chargers, h_list)])
+
+"""
+total power
+"""
+def total_power(sensors, p_list, chargers, h_list):
+    return sum([power_received(s, p, chargers, h_list) for (s, p) in zip(sensor, p_list)])

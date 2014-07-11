@@ -14,16 +14,13 @@ args = {
 }
 
 # choose the solution you want to try
-
 import solution
 solution = solution.solutionA.solution
 
+
 # choose how the chargers & sensors distributed
-
-import generate.charger
-import generate.sensor
-
+import generate
 distributions = {
-    'chargers' : generate.charger.random,
-    'sensors'  : generate.sensor.random,
+    'charger' : generate.charger.random,
+    'sensor'  : generate.sensor.random,
 }
