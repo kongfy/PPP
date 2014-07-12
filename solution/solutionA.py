@@ -5,7 +5,7 @@ from common.function import total_power, power
 from config import args
 
 def charger_h(c, sensors, p_list):
-    """calulate h for charger c(x, y) independently"""
+    """calculate h for charger c(x, y) independently"""
     (ratio, h) = max([(total_power(sensors, p_list, [c], [h])/power(h), h) for h in xrange(args['h_max'] + 1)])
     return h
 
@@ -14,7 +14,7 @@ def power_levels(chargers, sensors, p_list):
     return [charger_h(c, sensors, p_list) for c in chargers];
 
 def solution(chargers, sensors, p_list):
-    """solution A body funciton"""
+    """solution A body function"""
     # step 1: optimal power levels of all chargers
     h_list = power_levels(chargers, sensors, p_list)
     print "============================================="
