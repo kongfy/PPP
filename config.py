@@ -11,7 +11,9 @@ args = {
     'p_th'    : float(0.01),
     'alpha'   : float(0.64),
     'beta'    : float(30),
-    'k'       : 3                # only used when apply solution A
+    'k'       : 3,               # only used when apply solution A
+    'sp_min'  : float(0.3),      # lower bound of sensor's P
+    'sp_max'  : float(0.4),      # upper bound of sensor's P
 }
 
 # choose the solution you want to try
@@ -22,6 +24,7 @@ solution = solution.solutionA.solution
 # choose how the chargers & sensors distributed
 import generate
 distributions = {
-    'charger' : generate.charger.random,
-    'sensor'  : generate.sensor.random,
+    'charger' : generate.charger.rand,
+    'sensor'  : generate.sensor.rand,
+    'p_list'  : generate.p_list.rand,
 }

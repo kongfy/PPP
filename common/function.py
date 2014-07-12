@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from math import *
-from config import args
-
 # make sure division can get float answer
 from __future__ import division
+
+from math import *
+from config import args
 
 def distance(c, s):
     """distance between point c(x, y) & s(x, y)."""
@@ -31,7 +31,7 @@ def func_D(h):
 
 def power_charged(c, s, h):
     """power of c(x, y) to s(x, y)"""
-    max_d = func_D()
+    max_d = func_D(h)
     dis = distance(c, s)
 
     if dis <= max_d:

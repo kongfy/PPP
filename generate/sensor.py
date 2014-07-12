@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from config import args
-from point import random_point
+from point import add_point_to
 
-def random():
+def rand():
     """randomly distributed"""
-
     m = args['M']
     size = args['size']
-    # WARNING: may have some conflict points
-    return [(random_point(*size), random_point(*size)) for i in xrange(m)]
+    result = []
+    for i in xrange(m):
+        add_point_to(result, *size)
+    return result

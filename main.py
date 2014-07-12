@@ -14,6 +14,7 @@ def main():
     print "============================================="
     print "#            candidate chargers             #"
     print "============================================="
+    print "%d chargers generated:" % (len(chargers))
     pprint(chargers)
 
     # step 2: generate sensors
@@ -21,7 +22,16 @@ def main():
     print "============================================="
     print "#                 sensors                   #"
     print "============================================="
+    print "%d sensors generated." % (len(sensors))
     pprint(sensors)
+
+    # step 3: generate p_list
+    p_list = distributions['p_list']()
+    print "============================================="
+    print "#                sensor's P                 #"
+    print "============================================="
+    print "%d sensor's P generated." % (len(p_list))
+    pprint(p_list)
 
     # step 3: apply solution in config.py
     solution(chargers, sensors, p_list)
