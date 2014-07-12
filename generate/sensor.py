@@ -3,10 +3,9 @@
 from config import args
 from point import random_point
 
-"""
-randomly distributed
-"""
 def random():
+    """randomly distributed"""
+
     m = args['M']
     size = args['size']
     # WARNING: may have some conflict points

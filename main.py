@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from pprint import pprint
-from config import *
-import generate
+from config import args, distributions, solution
 
 def main():
     print "============================================="
@@ -13,11 +12,11 @@ def main():
     # step 1: generate candidate chargers
     chargers = distributions['charger']()
     print "============================================="
-    print "#            condidate chargers             #"
+    print "#            candidate chargers             #"
     print "============================================="
     pprint(chargers)
 
-    # setp 2: generate sensors
+    # step 2: generate sensors
     sensors = distributions['sensor']()
     print "============================================="
     print "#                 sensors                   #"
@@ -25,7 +24,7 @@ def main():
     pprint(sensors)
 
     # step 3: apply solution in config.py
-
+    solution(chargers, sensors, p_list)
 
 if __name__ == '__main__':
     main()

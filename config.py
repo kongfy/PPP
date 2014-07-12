@@ -11,6 +11,7 @@ args = {
     'p_th'    : float(0.01),
     'alpha'   : float(0.64),
     'beta'    : float(30),
+    'k'       : 3                # only used when apply solution A
 }
 
 # choose the solution you want to try
