@@ -12,8 +12,8 @@ args = {
     'alpha'   : float(0.64),
     'beta'    : float(30),
     'k'       : 3,               # only used when apply solution A
-    'sp_min'  : float(0.3),      # lower bound of sensor's P
-    'sp_max'  : float(0.4),      # upper bound of sensor's P
+    'sp_min'  : float(0.01),      # lower bound of sensor's P
+    'sp_max'  : float(0.02),      # upper bound of sensor's P
 }
 
 # choose the solution you want to try

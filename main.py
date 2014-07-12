@@ -34,7 +34,11 @@ def main():
     pprint(p_list)
 
     # step 3: apply solution in config.py
-    solution(chargers, sensors, p_list)
+    anser = solution(chargers, sensors, p_list)
+    print "============================================="
+    print "#                solution                   #"
+    print "============================================="
+    pprint(anser)
 
 if __name__ == '__main__':
     main()
