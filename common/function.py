@@ -29,21 +29,8 @@ def func_D(h):
 
     return sqrt(alpha / p_th * power(h)) - beta
 
-cache = None # global cache array
-
-def enable_cache_for(sensors, chargers, h_list):
-    global cache
-    cache = [[-1 for col in xrange(args['M'])] for ro in xrange(args['N'])];    # global cache array
-
 def power_charged(c, s, h):
     """power of c(x, y) to s(x, y)"""
-    # Note: use cache here to speed up!
-    (cid, x, y) = c
-    (sid, x, y) = s
-    global cache
-    if cache and cache[cid][sid] >= 0:
-        return cache[cid][sid]
-
     max_d = func_D(h)
     dis = distance(c, s)
 
@@ -51,13 +38,9 @@ def power_charged(c, s, h):
         alpha = args['alpha']
         beta = args['beta']
 
-        p = alpha/((distance(c, s)+beta)**2) * power(h)
+        return alpha/((distance(c, s)+beta)**2) * power(h)
     else:
-        p = 0
-
-    if cache:
-        cache[cid][sid] = p
-    return p
+        return 0
 
 def power_received(s, p, chargers, h_list):
     """sensor s(x, y) with power consumption p received power from chargers[(x, y), (x, y), ...]"""
