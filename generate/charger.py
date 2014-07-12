@@ -9,7 +9,7 @@ def rand():
     size = args['size']
     result = []
     for i in xrange(n):
-        add_point_to(result, *size)
+        add_point_to(result, i, *size)
     return result
 
 def regular():

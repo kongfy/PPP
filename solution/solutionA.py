@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from pprint import pprint
-from common.function import total_power, power
+from common.function import total_power, power, enable_cache_for
 from config import args, DEBUG
 from copy import copy
 import itertools
@@ -161,4 +161,5 @@ def solution(chargers, sensors, p_list):
         pprint(h_list)
 
     # step 2: apply algorithm 3
+    enable_cache_for(sensors, chargers, h_list)
     return ECalgorithm(chargers, h_list, sensors, p_list, args['k'])
