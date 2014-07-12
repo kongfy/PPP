@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# debug output switch
+DEBUG = True
+
+# program arguments
 args = {
     'size'    : (1000, 1000),    # (width, height) of 2-D plane
     'N'       : 50,              # numbers of candidate location/chargers [50, 100]
@@ -19,7 +23,6 @@ args = {
 # choose the solution you want to try
 import solution
 solution = solution.solutionA.solution
-
 
 # choose how the chargers & sensors distributed
 import generate
