@@ -50,7 +50,7 @@ def greedy(chargers, h_list, sensors, p_list, func):
                     max_index = index
 
         # greedy the charger we found
-        if max_index:
+        if max_index != None:
             Q = max_power
             b += max_cost
             result_c.append(chargers[max_index])
