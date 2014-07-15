@@ -9,8 +9,7 @@ args = {
     'N'       : 50,              # numbers of candidate location/chargers [50, 100]
     'M'       : 500,             # numbers of sensors [500, 2000]
     'B'       : 10000,           # power budget [10000, 20000]
-    'p_min'   : float(100),
-    'p_max'   : float(500),
+    'p_min'   : float(50),
     'h_max'   : 8,
     'p_th'    : float(0.01),
     'alpha'   : float(0.64),

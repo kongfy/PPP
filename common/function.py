@@ -16,10 +16,7 @@ def distance(c, s):
 def power(h):
     """power of c(x, y)"""
     p_min = args['p_min']
-    p_max = args['p_max']
-    h_max = args['h_max']
-
-    return p_min + float(h)/h_max * (p_max-p_min)
+    return h * p_min
 
 def func_D(h):
     """max charging distance of c(x, y)"""

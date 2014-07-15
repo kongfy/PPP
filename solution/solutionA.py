@@ -8,7 +8,7 @@ import itertools
 
 def charger_h(c, sensors, p_list):
     """calculate h for charger c(x, y) independently"""
-    (ratio, h) = max([(total_power(sensors, p_list, [c], [h])/power(h), h) for h in xrange(args['h_max'] + 1)])
+    (ratio, h) = max([(total_power(sensors, p_list, [c], [h])/power(h), h) for h in xrange(1, args['h_max'] + 1)])
     return h
 
 def power_levels(chargers, sensors, p_list):
