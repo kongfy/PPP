@@ -4,7 +4,6 @@ from pprint import pprint
 from common.function import total_power, power
 from config import args, DEBUG
 from copy import copy
-import itertools
 
 def charger_h(c, sensors, p_list):
     """calculate h for charger c(x, y) independently"""
@@ -27,8 +26,8 @@ def greedy(chargers, h_list, sensors, p_list, func):
     Budget = args['B']
     b = 0
     Q = 0
-    result_c = [];
-    result_h = [];
+    result_c = []
+    result_h = []
 
     while b < Budget:
         max_power = 0

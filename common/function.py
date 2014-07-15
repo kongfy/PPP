@@ -26,8 +26,14 @@ def func_D(h):
 
     return sqrt(alpha / p_th * power(h)) - beta
 
+cache = {}
 def power_charged(c, s, h):
     """power of c(x, y) to s(x, y)"""
+    # use cache here
+    global cache
+    if cache.get((c, s, h), None) != None:
+        return cache[(c, s, h)]
+
     max_d = func_D(h)
     dis = distance(c, s)
 
@@ -35,9 +41,12 @@ def power_charged(c, s, h):
         alpha = args['alpha']
         beta = args['beta']
 
-        return alpha/((distance(c, s)+beta)**2) * power(h)
+        ans = alpha/((distance(c, s)+beta)**2) * power(h)
     else:
-        return 0
+        ans = 0
+
+    cache[(c, s, h)] = ans
+    return ans
 
 def power_received(s, p, chargers, h_list):
     """sensor s(x, y) with power consumption p received power from chargers[(x, y), (x, y), ...]"""

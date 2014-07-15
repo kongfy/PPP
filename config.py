@@ -20,7 +20,7 @@ args = {
 
 # choose the solution you want to try
 import solution
-solution = solution.solutionA.solution
+solution = solution.solutionB.solution
 
 # choose how the chargers & sensors distributed
 import generate
