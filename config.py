@@ -18,10 +18,6 @@ args = {
     'sp_max'  : float(0.2),      # upper bound of sensor's P
 }
 
-# choose the solution you want to try
-import solution
-solution = solution.solutionB.solution
-
 # choose how the chargers & sensors distributed
 import generate
 distributions = {

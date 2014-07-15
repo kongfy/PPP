@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from pprint import pprint
-from config import args, distributions, solution, DEBUG
+from config import args, distributions, DEBUG
+import solution
 
 def main():
     if DEBUG:
@@ -36,11 +37,16 @@ def main():
         print "============================================="
         print "%d sensor's P generated." % (len(p_list))
         pprint(p_list)
-
-    # step 3: apply solution in config.py
-    anser = solution(chargers, sensors, p_list)
+    
+    anser = solution.solutionA.solution(chargers, sensors, p_list)
     print "============================================="
-    print "#                solution                   #"
+    print "#                solution A                 #"
+    print "============================================="
+    pprint(anser)
+    
+    anser = solution.solutionB.solution(chargers, sensors, p_list)
+    print "============================================="
+    print "#                solution B                 #"
     print "============================================="
     pprint(anser)
 
