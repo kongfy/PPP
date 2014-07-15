@@ -36,7 +36,7 @@ def greedy(chargers, sensors, p_list, func):
         for (i, c_h_list) in enumerate(Z):
             for (j, (c, h)) in enumerate(c_h_list):
                 cost = power(h)
-                if cost < b_left:
+                if cost <= b_left:
                     temp_Q = total_power(sensors, p_list, temp_c + [c], temp_h + [h])
                     delta = func(temp_Q - Q, cost)
                     if delta > max_delta:
@@ -61,7 +61,7 @@ def greedy(chargers, sensors, p_list, func):
         else:
             break
 
-    result = (Q, H)
+    result = (Q, H, b)
     if DEBUG:
         print "============================================="
         print "#           result of greedy part           #"
@@ -89,7 +89,7 @@ def budget_killer(H, chargers, sensors, p_list):
         cost += power(h)
 
     max_power = 0
-    while Budget - cost > p_min:
+    while Budget - cost >= p_min:
         max_charger = None
 
         # current chosen sets
@@ -101,7 +101,7 @@ def budget_killer(H, chargers, sensors, p_list):
 
         for c in chargers:
             if H.get(c, 0) < h_max:
-                temp_Q = total_power(sensors, p_list, temp_c + [c], temp_h + [h])
+                temp_Q = total_power(sensors, p_list, temp_c + [c], temp_h + [1])
                 if temp_Q > max_power:
                     max_power = temp_Q
                     max_charger = c
@@ -112,6 +112,12 @@ def budget_killer(H, chargers, sensors, p_list):
         else:
             break
 
+    if DEBUG:
+        print "============================================="
+        print "#       utilize the remaining budget        #"
+        print "============================================="
+        print 'Budget : %f' % cost
+        
     result_c = []
     result_h = []
     for (c, h) in H.iteritems():

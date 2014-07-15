@@ -39,7 +39,7 @@ def greedy(chargers, h_list, sensors, p_list, func):
         # find the charger which can increase the total power most
         for (index, (c, h)) in enumerate(zip(chargers, h_list)):
             cost = power(h)
-            if cost < b_left:
+            if cost <= b_left:
                 temp_Q = total_power(sensors, p_list, result_c + [c], result_h + [h])
                 delta = func(temp_Q - Q, cost)
                 if delta > max_delta:
