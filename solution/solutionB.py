@@ -17,8 +17,6 @@ def greedy(chargers, sensors, p_list, func):
     Budget = args['B']
     b = 0
     Q = 0
-    result_c = []
-    result_h = []
     H = {}
 
     # construct matrix Z
@@ -70,16 +68,16 @@ def greedy(chargers, sensors, p_list, func):
         print "============================================="
         pprint(result)
 
-    return result
+    return H
 
 
 def TCBalgorithm(chargers, sensors, p_list):
-    """Two Choices-based Algorithm, return (power, H)"""
+    """Two Choices-based Algorithm, return H"""
     return max([greedy(copy(chargers), sensors, p_list, delta_one),
                 greedy(copy(chargers), sensors, p_list, delta_two),
             ])
 
-def budget_killer(Q, H, chargers, sensors, p_list):
+def budget_killer(H, chargers, sensors, p_list):
     """utilize the remaining budget, return (Q, chargers, h_list)"""
     p_min = args['p_min']
     Budget = args['B']
@@ -90,7 +88,7 @@ def budget_killer(Q, H, chargers, sensors, p_list):
     for (c, h) in H.iteritems():
         cost += power(h)
 
-    max_power = Q
+    max_power = 0
     while Budget - cost > p_min:
         max_charger = None
 
@@ -110,7 +108,7 @@ def budget_killer(Q, H, chargers, sensors, p_list):
 
         if max_charger != None:
             cost += p_min
-            H[max_charger] += 1
+            H[max_charger] = H.get(max_charger, 0) + 1
         else:
             break
 
@@ -127,7 +125,7 @@ def budget_killer(Q, H, chargers, sensors, p_list):
 def solution(chargers, sensors, p_list):
     """solution B body function"""
     # two choice phase
-    (Q, H) = TCBalgorithm(chargers, sensors, p_list)
+    H = TCBalgorithm(chargers, sensors, p_list)
 
     # utilize the remaining budget
-    return budget_killer(Q, H, chargers, sensors, p_list)
+    return budget_killer(H, chargers, sensors, p_list)
