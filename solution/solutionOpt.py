@@ -11,6 +11,7 @@ g_Q = 0
 g_result = None
 g_C = []
 g_H = []
+g_B = args['B']
 
 def update(sensors, p_list):
     """update anser"""
@@ -26,7 +27,7 @@ def update(sensors, p_list):
         print g_result
 
 
-def solve(chargers, n, sensors, p_list):
+def solve(chargers, n, cost, sensors, p_list):
     """
     n is the number of chargers have already been considered,
     enumerate every possible choise using dfs
@@ -39,14 +40,16 @@ def solve(chargers, n, sensors, p_list):
         return
 
     # don't chose this charger
-    solve(chargers, n + 1, sensors, p_list)
+    solve(chargers, n + 1, cost, sensors, p_list)
 
     # chose it by every possible h
     c = chargers[n]
     for h in xrange(1, args['h_max'] + 1):
+        if power(h) + cost > g_B:
+            break
         g_C.append(c)
         g_H.append(h)
-        solve(chargers, n + 1, sensors, p_list)
+        solve(chargers, n + 1, cost + power(h), sensors, p_list)
         del g_C[len(g_C) - 1]
         del g_H[len(g_H) - 1]
 
@@ -56,7 +59,7 @@ def solution(chargers, sensors, p_list):
     so agly...so sad...dfs
     """
 
-    solve(chargers, 0, sensors, p_list)
+    solve(chargers, 0, 0, sensors, p_list)
 
     global g_Q
     global g_result
