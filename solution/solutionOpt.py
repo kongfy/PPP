@@ -24,7 +24,7 @@ def update(sensors, p_list):
     if temp_Q > g_Q:
         g_Q = temp_Q
         g_result = (copy(g_C), copy(g_H))
-        print g_result
+        print g_result, g_Q
 
 
 def solve(chargers, n, cost, sensors, p_list):
@@ -58,6 +58,10 @@ def solution(chargers, sensors, p_list):
     solution Opt body function.
     so agly...so sad...dfs
     """
+    if DEBUG:
+        print "============================================="
+        print "#                update trace               #"
+        print "============================================="
 
     solve(chargers, 0, 0, sensors, p_list)
 

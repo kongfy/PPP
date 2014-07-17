@@ -52,6 +52,12 @@ def main():
     pprint(anser)
     """
 
+    anser = solution.solutionRan.solution(chargers, sensors, p_list)
+    print "============================================="
+    print "#               solution Ran                #"
+    print "============================================="
+    pprint(anser)
+
     anser = solution.solutionOpt.solution(chargers, sensors, p_list)
     print "============================================="
     print "#               solution Opt                #"
