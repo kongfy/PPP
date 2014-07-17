@@ -37,16 +37,24 @@ def main():
         print "============================================="
         print "%d sensor's P generated." % (len(p_list))
         pprint(p_list)
-    
+
+    """
     anser = solution.solutionA.solution(chargers, sensors, p_list)
     print "============================================="
     print "#                solution A                 #"
     print "============================================="
     pprint(anser)
-    
+
     anser = solution.solutionB.solution(chargers, sensors, p_list)
     print "============================================="
     print "#                solution B                 #"
+    print "============================================="
+    pprint(anser)
+    """
+
+    anser = solution.solutionOpt.solution(chargers, sensors, p_list)
+    print "============================================="
+    print "#               solution Opt                #"
     print "============================================="
     pprint(anser)
 
