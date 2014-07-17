@@ -11,7 +11,7 @@ def distance(c, s):
     (cid, xc, yc) = c
     (sid, xs, ys) = s
 
-    return sqrt((xc-xs)**2 + (yc-ys)**2)
+    return float(sqrt((xc-xs)**2 + (yc-ys)**2))
 
 def power(h):
     """power of c(x, y)"""
