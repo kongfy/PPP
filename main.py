@@ -3,8 +3,10 @@
 from pprint import pprint
 from config import args, distributions, DEBUG
 import solution
+from multiprocessing import Pool
 
-def main():
+def worker():
+    """worker function, used to create processings"""
     if DEBUG:
         print "============================================="
         print "#                  args                     #"
@@ -38,31 +40,59 @@ def main():
         print "%d sensor's P generated." % (len(p_list))
         pprint(p_list)
 
-    """
+    result = {}
+
     anser = solution.solutionA.solution(chargers, sensors, p_list)
+    result['A'] = anser
     print "============================================="
     print "#                solution A                 #"
     print "============================================="
     pprint(anser)
 
     anser = solution.solutionB.solution(chargers, sensors, p_list)
+    result['B'] = anser
     print "============================================="
     print "#                solution B                 #"
     print "============================================="
     pprint(anser)
-    """
 
     anser = solution.solutionRan.solution(chargers, sensors, p_list)
+    result['Random'] = anser
     print "============================================="
     print "#               solution Ran                #"
     print "============================================="
     pprint(anser)
 
     anser = solution.solutionOpt.solution(chargers, sensors, p_list)
+    result['Opt'] = anser
     print "============================================="
     print "#               solution Opt                #"
     print "============================================="
     pprint(anser)
+
+    return result
+
+def main():
+    """main funciton."""
+    pool = Pool(args['worker']);
+
+    tasks = [pool.apply_async(worker) for i in xrange(args['times'])]
+
+    pool.close()
+    pool.join()
+
+    results = [task.get() for task in tasks]
+
+    final = {}
+    for result in results:
+        for (key, (Q, C, H)) in result.iteritems():
+            final[key] = final.get(key, 0) + Q
+
+    for (key, Q) in final.iteritems():
+        final[key] = Q / len(results)
+
+    pprint(final)
+
 
 if __name__ == '__main__':
     main()

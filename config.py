@@ -16,6 +16,8 @@ args = {
     'beta'    : float(30),
     'sp_min'  : float(0.1),      # lower bound of sensor's P
     'sp_max'  : float(0.2),      # upper bound of sensor's P
+    'times'   : 20,              # repeat times
+    'worker'  : 20,              # numbers of worker process
 }
 
 # choose how the chargers & sensors distributed
