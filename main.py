@@ -95,6 +95,8 @@ def main():
     for (key, Q) in final.iteritems():
         final[key] = Q / len(results)
 
+    pprint(args)
+    pprint(results)
     pprint(final)
 
 
