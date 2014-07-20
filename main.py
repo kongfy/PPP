@@ -44,31 +44,35 @@ def worker():
 
     anser = solution.solutionA.solution(chargers, sensors, p_list)
     result['A'] = anser
-    print "============================================="
-    print "#                solution A                 #"
-    print "============================================="
-    pprint(anser)
+    if DEBUG:
+        print "============================================="
+        print "#                solution A                 #"
+        print "============================================="
+        pprint(anser)
 
     anser = solution.solutionB.solution(chargers, sensors, p_list)
     result['B'] = anser
-    print "============================================="
-    print "#                solution B                 #"
-    print "============================================="
-    pprint(anser)
+    if DEBUG:
+        print "============================================="
+        print "#                solution B                 #"
+        print "============================================="
+        pprint(anser)
 
     anser = solution.solutionRan.solution(chargers, sensors, p_list)
     result['Random'] = anser
-    print "============================================="
-    print "#               solution Ran                #"
-    print "============================================="
-    pprint(anser)
+    if DEBUG:
+        print "============================================="
+        print "#               solution Ran                #"
+        print "============================================="
+        pprint(anser)
 
     anser = solution.solutionOpt.solution(chargers, sensors, p_list)
     result['Opt'] = anser
-    print "============================================="
-    print "#               solution Opt                #"
-    print "============================================="
-    pprint(anser)
+    if DEBUG:
+        print "============================================="
+        print "#               solution Opt                #"
+        print "============================================="
+        pprint(anser)
 
     return result
 
