@@ -6,9 +6,9 @@ DEBUG = True
 # program arguments
 args = {
     'size'    : (300, 300),      # (width, height) of 2-D plane
-    'N'       : 10,              # numbers of candidate location/chargers [50, 100]
-    'M'       : 300,             # numbers of sensors [500, 2000]
-    'B'       : 1000,            # power budget [10000, 20000]
+    'N'       : 8,               # numbers of candidate location/chargers [50, 100]
+    'M'       : 130,             # numbers of sensors [500, 2000]
+    'B'       : 800,             # power budget [10000, 20000]
     'p_min'   : float(50),
     'h_max'   : 4,
     'p_th'    : float(0.01),
