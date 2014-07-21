@@ -100,7 +100,7 @@ def main():
     pprint(final)
 
     f = open('summary.txt', 'a')
-    f.write(config_name + ' : ' + str(final))
+    f.write(config_name + ' : ' + str(final) + '\n')
     f.close()
 
 if __name__ == '__main__':
