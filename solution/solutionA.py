@@ -70,9 +70,9 @@ def greedy(chargers, h_list, sensors, p_list, func):
 
 def TCBalgorithm(chargers, h_list, sensors, p_list):
     """Two Choices-based Algorithm, return (power, chargers, h_list)"""
-    return max([greedy(copy(chargers), copy(h_list), sensors, p_list, delta_one),
-                greedy(copy(chargers), copy(h_list), sensors, p_list, delta_two),
-            ])
+    return max(greedy(copy(chargers), copy(h_list), sensors, p_list, delta_one),
+               greedy(copy(chargers), copy(h_list), sensors, p_list, delta_two),
+               )
 
 def solution(chargers, sensors, p_list):
     """solution A body function"""

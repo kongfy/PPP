@@ -68,14 +68,16 @@ def greedy(chargers, sensors, p_list, func):
         print "============================================="
         pprint(result)
 
-    return (Q, H)
+    return H
 
 
 def TCBalgorithm(chargers, sensors, p_list):
-    """Two Choices-based Algorithm, return (Q, H)"""
-    return max([greedy(copy(chargers), sensors, p_list, delta_one),
-                greedy(copy(chargers), sensors, p_list, delta_two),
-            ])
+    """Two Choices-based Algorithm, return (Q, chargers, h_list)"""
+    H1 = greedy(copy(chargers), sensors, p_list, delta_one)
+    H2 = greedy(copy(chargers), sensors, p_list, delta_two)
+    return max(budget_killer(H1, chargers, sensors, p_list),
+               budget_killer(H2, chargers, sensors, p_list),
+               )
 
 def budget_killer(H, chargers, sensors, p_list):
     """utilize the remaining budget, return (Q, chargers, h_list)"""
@@ -132,8 +134,4 @@ def budget_killer(H, chargers, sensors, p_list):
 
 def solution(chargers, sensors, p_list):
     """solution B body function"""
-    # two choice phase
-    (Q, H) = TCBalgorithm(chargers, sensors, p_list)
-
-    # utilize the remaining budget
-    return budget_killer(H, chargers, sensors, p_list)
+    return TCBalgorithm(chargers, sensors, p_list)
