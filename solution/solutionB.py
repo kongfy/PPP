@@ -3,7 +3,6 @@
 from pprint import pprint
 from common.function import total_power, power
 from config import args, DEBUG
-from copy import copy
 
 def delta_one(delta, cost):
     return delta
@@ -73,8 +72,8 @@ def greedy(chargers, sensors, p_list, func):
 
 def TCBalgorithm(chargers, sensors, p_list):
     """Two Choices-based Algorithm, return (Q, chargers, h_list)"""
-    H1 = greedy(copy(chargers), sensors, p_list, delta_one)
-    H2 = greedy(copy(chargers), sensors, p_list, delta_two)
+    H1 = greedy(chargers, sensors, p_list, delta_one)
+    H2 = greedy(chargers, sensors, p_list, delta_two)
     return max(budget_killer(H1, chargers, sensors, p_list),
                budget_killer(H2, chargers, sensors, p_list),
                )
