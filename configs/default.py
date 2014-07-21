@@ -27,3 +27,5 @@ distributions = {
     'sensor'  : generate.sensor.rand,
     'p_list'  : generate.p_list.rand,
 }
+
+config_name = 'default'

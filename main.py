@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from pprint import pprint
-from config import args, distributions, DEBUG
+from config import args, distributions, DEBUG, config_name
 import solution
 from multiprocessing import Pool
 
@@ -99,6 +99,9 @@ def main():
     pprint(results)
     pprint(final)
 
+    f = open('summary.txt', 'a')
+    f.write(config_name + ' : ' + str(final))
+    f.close()
 
 if __name__ == '__main__':
     main()
