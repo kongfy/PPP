@@ -87,10 +87,14 @@ def budget_killer(H, chargers, sensors, p_list):
 
     # current cost
     cost = 0
+    temp_c = []
+    temp_h = []
     for (c, h) in H.iteritems():
+        temp_c.append(c)
+        temp_h.append(h)
         cost += power(h)
 
-    max_power = 0
+    max_power = total_power(sensors, p_list, temp_c, temp_h)
     while Budget - cost >= p_min:
         max_charger = None
 
@@ -128,7 +132,7 @@ def budget_killer(H, chargers, sensors, p_list):
         result_c.append(c)
         result_h.append(h)
 
-    result = (total_power(sensors, p_list, result_c, result_h), result_c, result_h)
+    result = (max_power, result_c, result_h)
     return result
 
 

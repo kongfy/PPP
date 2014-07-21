@@ -6,7 +6,7 @@ import solution
 from multiprocessing import Pool
 
 def worker():
-    """worker function, used to create processings"""
+    """worker function, used to create processing"""
     if DEBUG:
         print "============================================="
         print "#                  args                     #"
@@ -77,7 +77,7 @@ def worker():
     return result
 
 def main():
-    """main funciton."""
+    """main function."""
     pool = Pool(args['worker']);
 
     tasks = [pool.apply_async(worker) for i in xrange(args['times'])]
