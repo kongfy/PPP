@@ -14,8 +14,8 @@ args = {
     'p_th'    : float(0.01),
     'alpha'   : float(0.64),
     'beta'    : float(30),
-    'sp_min'  : float(0.1),      # lower bound of sensor's P
-    'sp_max'  : float(0.2),      # upper bound of sensor's P
+    'sp_min'  : float(0.02),     # lower bound of sensor's P
+    'sp_max'  : float(0.03),     # upper bound of sensor's P
     'times'   : 10,              # repeat times
     'worker'  : 10,              # numbers of worker process
 }

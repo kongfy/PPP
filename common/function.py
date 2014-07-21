@@ -24,7 +24,7 @@ def func_D(h):
     beta = args['beta']
     p_th = args['p_th']
 
-    return sqrt(alpha / p_th * power(h)) - beta
+    return max(sqrt(alpha / p_th * power(h)) - beta, 0)
 
 cache = {}
 def power_charged(c, s, h):
