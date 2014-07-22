@@ -4,8 +4,11 @@ from pprint import pprint
 from config import args, distributions, DEBUG, config_name
 import solution
 from multiprocessing import Pool
+import timeit
 
 def worker():
+    tic = timeit.default_timer()
+    
     """worker function, used to create processing"""
     if DEBUG:
         print "============================================="
@@ -75,8 +78,8 @@ def worker():
         print "============================================="
         pprint(anser)
     """
-
-    return result
+    toc = timeit.default_timer()
+    return (toc - tic, result)
 
 def main():
     """main function."""
@@ -90,19 +93,27 @@ def main():
     results = [task.get() for task in tasks]
 
     final = {}
-    for result in results:
+    times = []
+    for (time, result) in results:
+        times.append(time)
         for (key, (Q, C, H)) in result.iteritems():
-            final[key] = final.get(key, 0) + Q
+            value = final.get(key, {})
+            value['max'] = max(value.get('max', 0), Q)
+            value['min'] = min(value.get('min', float('inf')), Q)
+            value['avg'] = value.get('avg', 0) + Q
+            final[key] = value
 
-    for (key, Q) in final.iteritems():
-        final[key] = Q / len(results)
+    for (key, value) in final.iteritems():
+        value['avg'] = value['avg'] / len(results)
 
     pprint(args)
     pprint(results)
+    pprint(times)
     pprint(final)
 
     f = open('summary.txt', 'a')
-    f.write(config_name + ' : ' + str(final) + '\n')
+    time_str = ' average time : %f s' % (sum(times) / len(times))
+    f.write(config_name + ' : ' + str(final) + time_str + '\n')
     f.close()
 
 if __name__ == '__main__':
