@@ -28,4 +28,4 @@ distributions = {
     'p_list'  : generate.p_list.rand,
 }
 
-config_name = 'default'
+config_name = 'B = 3000'

@@ -7,7 +7,7 @@ DEBUG = True
 args = {
     'size'    : (1000, 1000),    # (width, height) of 2-D plane
     'N'       : 20,              # numbers of candidate location/chargers [50, 100]
-    'M'       : 200,             # numbers of sensors [500, 2000]
+    'M'       : 100,             # numbers of sensors [500, 2000]
     'B'       : 3000,            # power budget [10000, 20000]
     'p_min'   : float(50),
     'h_max'   : 6,
@@ -28,4 +28,4 @@ distributions = {
     'p_list'  : generate.p_list.rand,
 }
 
-config_name = 'default'
+config_name = 'M = 100'

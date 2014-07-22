@@ -10,7 +10,7 @@ args = {
     'M'       : 200,             # numbers of sensors [500, 2000]
     'B'       : 3000,            # power budget [10000, 20000]
     'p_min'   : float(50),
-    'h_max'   : 6,
+    'h_max'   : 8,
     'p_th'    : float(0.01),
     'alpha'   : float(0.64),
     'beta'    : float(30),
@@ -28,4 +28,4 @@ distributions = {
     'p_list'  : generate.p_list.rand,
 }
 
-config_name = 'default'
+config_name = 'h_max = 8'

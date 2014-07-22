@@ -66,6 +66,7 @@ def worker():
         print "============================================="
         pprint(anser)
 
+    """
     anser = solution.solutionOpt.solution(chargers, sensors, p_list)
     result['Opt'] = anser
     if DEBUG:
@@ -73,6 +74,7 @@ def worker():
         print "#               solution Opt                #"
         print "============================================="
         pprint(anser)
+    """
 
     return result
 
