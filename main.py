@@ -7,8 +7,6 @@ from multiprocessing import Pool
 import timeit
 
 def worker():
-    tic = timeit.default_timer()
-    
     """worker function, used to create processing"""
     if DEBUG:
         print "============================================="
@@ -45,24 +43,31 @@ def worker():
 
     result = {}
 
+    
+    tic = timeit.default_timer()
     anser = solution.solutionA.solution(chargers, sensors, p_list)
-    result['A'] = anser
+    toc = timeit.default_timer()
+    result['A'] = (toc - tic, anser)
     if DEBUG:
         print "============================================="
         print "#                solution A                 #"
         print "============================================="
         pprint(anser)
 
+    tic = timeit.default_timer()
     anser = solution.solutionB.solution(chargers, sensors, p_list)
-    result['B'] = anser
+    toc = timeit.default_timer()
+    result['B'] = (toc - tic, anser)
     if DEBUG:
         print "============================================="
         print "#                solution B                 #"
         print "============================================="
         pprint(anser)
 
+    tic = timeit.default_timer()
     anser = solution.solutionRan.solution(chargers, sensors, p_list)
-    result['Random'] = anser
+    toc = timeit.default_timer()
+    result['Random'] = (toc - tic, anser)
     if DEBUG:
         print "============================================="
         print "#               solution Ran                #"
@@ -70,16 +75,18 @@ def worker():
         pprint(anser)
 
     """
+    tic = timeit.default_timer()
     anser = solution.solutionOpt.solution(chargers, sensors, p_list)
-    result['Opt'] = anser
+    toc = timeit.default_timer()
+    result['Opt'] = (toc - tic, anser)
     if DEBUG:
         print "============================================="
         print "#               solution Opt                #"
         print "============================================="
         pprint(anser)
     """
-    toc = timeit.default_timer()
-    return (toc - tic, result)
+    
+    return result
 
 def main():
     """main function."""
@@ -94,16 +101,17 @@ def main():
 
     final = {}
     times = []
-    for (time, result) in results:
-        times.append(time)
-        for (key, (Q, C, H)) in result.iteritems():
+    for result in results:
+        for (key, (time, (Q, C, H))) in result.iteritems():
             value = final.get(key, {})
+            value['time'] = value.get('time', 0) + time
             value['max'] = max(value.get('max', 0), Q)
             value['min'] = min(value.get('min', float('inf')), Q)
             value['avg'] = value.get('avg', 0) + Q
             final[key] = value
 
     for (key, value) in final.iteritems():
+        value['time'] = value['time'] / len(results)
         value['avg'] = value['avg'] / len(results)
 
     pprint(args)
@@ -112,8 +120,7 @@ def main():
     pprint(final)
 
     f = open('summary.txt', 'a')
-    time_str = ' average time : %f s' % (sum(times) / len(times))
-    f.write(config_name + ' : ' + str(final) + time_str + '\n')
+    f.write(config_name + ' : ' + str(final) + '\n')
     f.close()
 
 if __name__ == '__main__':
