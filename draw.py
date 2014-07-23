@@ -3,11 +3,9 @@
 from pprint import pprint
 from config import args, distributions, DEBUG, config_name
 import solution
-from multiprocessing import Pool
-import timeit
+from common import plot
 
-def worker():
-    """worker function, used to create processing"""
+def main():
     if DEBUG:
         print "============================================="
         print "#                  args                     #"
@@ -41,86 +39,41 @@ def worker():
         print "%d sensor's P generated." % (len(p_list))
         pprint(p_list)
 
-    result = {}
-
-    tic = timeit.default_timer()
+    """
     anser = solution.solutionA.solution(chargers, sensors, p_list)
-    toc = timeit.default_timer()
-    result['A'] = (toc - tic, anser)
     if DEBUG:
         print "============================================="
         print "#                solution A                 #"
         print "============================================="
         pprint(anser)
+    """
 
-    tic = timeit.default_timer()
     anser = solution.solutionB.solution(chargers, sensors, p_list)
-    toc = timeit.default_timer()
-    result['B'] = (toc - tic, anser)
     if DEBUG:
         print "============================================="
         print "#                solution B                 #"
         print "============================================="
         pprint(anser)
 
-    tic = timeit.default_timer()
+    plot.draw(chargers, sensors, anser)
+
+    """
     anser = solution.solutionRan.solution(chargers, sensors, p_list)
-    toc = timeit.default_timer()
-    result['Random'] = (toc - tic, anser)
     if DEBUG:
         print "============================================="
         print "#               solution Ran                #"
         print "============================================="
         pprint(anser)
+    """
 
     """
-    tic = timeit.default_timer()
     anser = solution.solutionOpt.solution(chargers, sensors, p_list)
-    toc = timeit.default_timer()
-    result['Opt'] = (toc - tic, anser)
     if DEBUG:
         print "============================================="
         print "#               solution Opt                #"
         print "============================================="
         pprint(anser)
     """
-
-    return result
-
-def main():
-    """main function."""
-    pool = Pool(args['worker']);
-
-    tasks = [pool.apply_async(worker) for i in xrange(args['times'])]
-
-    pool.close()
-    pool.join()
-
-    results = [task.get() for task in tasks]
-
-    final = {}
-    times = []
-    for result in results:
-        for (key, (time, (Q, C, H))) in result.iteritems():
-            value = final.get(key, {})
-            value['time'] = value.get('time', 0) + time
-            value['max'] = max(value.get('max', 0), Q)
-            value['min'] = min(value.get('min', float('inf')), Q)
-            value['avg'] = value.get('avg', 0) + Q
-            final[key] = value
-
-    for (key, value) in final.iteritems():
-        value['time'] = value['time'] / len(results)
-        value['avg'] = value['avg'] / len(results)
-
-    pprint(args)
-    pprint(results)
-    pprint(times)
-    pprint(final)
-
-    f = open('summary.txt', 'a')
-    f.write(config_name + ' : ' + str(final) + '\n')
-    f.close()
 
 if __name__ == '__main__':
     main()

@@ -6,9 +6,9 @@ DEBUG = True
 # program arguments
 args = {
     'size'    : (1000, 1000),    # (width, height) of 2-D plane
-    'N'       : 50,              # numbers of candidate location/chargers [50, 100]
+    'N'       : 20,              # numbers of candidate location/chargers [50, 100]
     'M'       : 200,             # numbers of sensors [500, 2000]
-    'B'       : 10000,            # power budget [10000, 20000]
+    'B'       : 4500,            # power budget [10000, 20000]
     'p_min'   : float(50),
     'h_max'   : 6,
     'p_th'    : float(0.01),
@@ -28,4 +28,4 @@ distributions = {
     'p_list'  : generate.p_list.rand,
 }
 
-config_name = 'default'
+config_name = 'B = 4500'
