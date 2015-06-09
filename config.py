@@ -5,9 +5,9 @@ DEBUG = True
 
 # program arguments
 args = {
-    'size'    : (100, 100),    # (width, height) of 2-D plane
-    'N'       : 50,              # numbers of candidate location/chargers [50, 100]
-    'M'       : 200,             # numbers of sensors [500, 2000]
+    'size'    : (500, 500),    # (width, height) of 2-D plane
+    'N'       : 5,              # numbers of candidate location/chargers [50, 100]
+    'M'       : 100,             # numbers of sensors [500, 2000]
     'B'       : 10000,            # power budget [10000, 20000]
     'p_min'   : float(50),
     'h_max'   : 6,
@@ -22,13 +22,14 @@ args = {
     # extension
     't_min'   : 5,
     't_max'   : 10,
+    'hop'     : 0.1,
 }
 
 # choose how the chargers & sensors distributed
 import generate
 distributions = {
-    'charger' : generate.charger.fixed,
-    'sensor'  : generate.sensor.rand,
+    'charger' : generate.charger.rand,
+    'sensor'  : generate.sensor.rand_trace,
     'p_list'  : generate.p_list.rand,
 }
 

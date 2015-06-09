@@ -20,9 +20,9 @@ def fixed():
     result = []
 
     cid = 0
-    for x in xrange(n + 1):
-        for y in xrange(m + 1):
-            result.append((cid, x, y))
+    for x in xrange(n):
+        for y in xrange(m):
+            result.append((cid, x + 0.5, y + 0.5))
             cid += 1
 
     return result
