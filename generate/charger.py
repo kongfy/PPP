@@ -12,6 +12,17 @@ def rand():
         add_point_to(result, i, *size)
     return result
 
-def regular():
-    """regularly distributed"""
-    pass
+def fixed():
+    """
+    fixed ditributed
+    """
+    n, m = args['size']
+    result = []
+
+    cid = 0
+    for x in xrange(n + 1):
+        for y in xrange(m + 1):
+            result.append((cid, x, y))
+            cid += 1
+
+    return result
