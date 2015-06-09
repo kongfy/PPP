@@ -89,7 +89,7 @@ def worker():
 
 def main():
     """main function."""
-    pool = Pool(args['worker']);
+    pool = Pool(args['worker'])
 
     tasks = [pool.apply_async(worker) for i in xrange(args['times'])]
 

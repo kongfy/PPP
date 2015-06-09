@@ -52,6 +52,10 @@ def power_received(s, p, chargers, h_list):
     """sensor s(x, y) with power consumption p received power from chargers[(x, y), (x, y), ...]"""
     return min(sum([power_charged(c, s, h) for (c, h) in zip(chargers, h_list)]), p)
 
+def sensor_power(time_slice, p, chargers, h_list):
+    """total power received by a sensor"""
+    return sum([power_received(s, p, chargers, h_list) * weight for (s, weight) in time_slice])
+
 def total_power(sensors, p_list, chargers, h_list):
     """total power"""
-    return sum([power_received(s, p, chargers, h_list) for (s, p) in zip(sensors, p_list)])
+    return sum([sensor_power(time_slice, p, chargers, h_list) for (time_slice, p) in zip(sensors, p_list)])
