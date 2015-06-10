@@ -23,6 +23,8 @@ def worker():
         print "%d chargers generated:" % (len(chargers))
         pprint(chargers)
 
+    return
+
     # step 2: generate sensors
     sensors = distributions['sensor']()
     if DEBUG:

@@ -17,12 +17,20 @@ def fixed():
     fixed ditributed
     """
     n, m = args['size']
+    d = args['D']
     result = []
 
+    if n % d != 0 or m % d != 0:
+        raise Exception
+
+    length = min(n/d, m/d)
+    n /= length
+    m /= length
     cid = 0
+
     for x in xrange(n):
         for y in xrange(m):
-            result.append((cid, x + 0.5, y + 0.5))
+            result.append((cid, (x+0.5) * length, (y+0.5) * length))
             cid += 1
 
     return result
