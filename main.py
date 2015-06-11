@@ -75,17 +75,16 @@ def worker():
         print "============================================="
         pprint(anser)
 
-    """
-    tic = timeit.default_timer()
-    anser = solution.solutionOpt.solution(chargers, sensors, p_list)
-    toc = timeit.default_timer()
-    result['Opt'] = (toc - tic, anser)
-    if DEBUG:
-        print "============================================="
-        print "#               solution Opt                #"
-        print "============================================="
-        pprint(anser)
-    """
+    if args['opt']:
+        tic = timeit.default_timer()
+        anser = solution.solutionOpt.solution(chargers, sensors, p_list)
+        toc = timeit.default_timer()
+        result['Opt'] = (toc - tic, anser)
+        if DEBUG:
+            print "============================================="
+            print "#               solution Opt                #"
+            print "============================================="
+            pprint(anser)
 
     return result
 

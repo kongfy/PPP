@@ -17,15 +17,22 @@ args = {
     'sp_min'  : float(0.02),     # lower bound of sensor's P
     'sp_max'  : float(0.03),     # upper bound of sensor's P
     'times'   : 10,              # repeat times
-    'worker'  : 4,               # numbers of worker process
+    'worker'  : 10,              # numbers of worker process
+
+    # extension
+    't_min'   : 5,
+    't_max'   : 10,
+    'hop'     : 0.2,
+    'D'       : 3,
+    'opt'     : True,
 }
 
 # choose how the chargers & sensors distributed
 import generate
 distributions = {
     'charger' : generate.charger.rand,
-    'sensor'  : generate.sensor.rand,
+    'sensor'  : generate.sensor.rand_path,
     'p_list'  : generate.p_list.rand,
 }
 
-config_name = 'h_max = 6'
+config_name = 'h_max = 6, a'

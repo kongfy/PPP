@@ -22,8 +22,9 @@ args = {
     # extension
     't_min'   : 5,
     't_max'   : 10,
-    'hop'     : 0.1,
-    'D'       : 5,
+    'hop'     : 0.2,
+    'D'       : 3,
+    'opt'     : False,
 }
 
 # choose how the chargers & sensors distributed
