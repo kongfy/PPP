@@ -20,8 +20,8 @@ args = {
     'worker'  : 10,              # numbers of worker process
 
     # extension
-    't_min'   : 3,
-    't_max'   : 3,
+    't_min'   : 5,
+    't_max'   : 5,
     'hop'     : 0.2,
     'D'       : 3,
     'opt'     : True,
@@ -35,4 +35,4 @@ distributions = {
     'p_list'  : generate.p_list.rand,
 }
 
-config_name = 'T = 3, a'
+config_name = 'T = 5, a'

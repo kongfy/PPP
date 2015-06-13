@@ -20,8 +20,8 @@ args = {
     'worker'  : 10,              # numbers of worker process
 
     # extension
-    't_min'   : 3,
-    't_max'   : 3,
+    't_min'   : 7,
+    't_max'   : 7,
     'hop'     : 0.2,
     'D'       : 3,
     'opt'     : True,
@@ -31,8 +31,8 @@ args = {
 import generate
 distributions = {
     'charger' : generate.charger.rand,
-    'sensor'  : generate.sensor.rand_path,
+    'sensor'  : generate.sensor.rand_trace,
     'p_list'  : generate.p_list.rand,
 }
 
-config_name = 'T = 3, a'
+config_name = 'T = 7, b'

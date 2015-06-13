@@ -31,8 +31,8 @@ args = {
 import generate
 distributions = {
     'charger' : generate.charger.rand,
-    'sensor'  : generate.sensor.rand_path,
+    'sensor'  : generate.sensor.rand_trace,
     'p_list'  : generate.p_list.rand,
 }
 
-config_name = 'T = 3, a'
+config_name = 'T = 3, b'
