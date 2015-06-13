@@ -30,4 +30,5 @@ def fixed():
             result.append((cid, (x+0.5) * length, (y+0.5) * length))
             cid += 1
 
+    args['N'] = len(result)
     return result
