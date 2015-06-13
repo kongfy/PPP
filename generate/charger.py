@@ -20,9 +20,6 @@ def fixed():
     d = args['D']
     result = []
 
-    if n % d != 0 or m % d != 0:
-        raise Exception
-
     length = min(n/d, m/d)
     n /= length
     m /= length

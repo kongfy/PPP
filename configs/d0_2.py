@@ -22,17 +22,17 @@ args = {
     # extension
     't_min'   : 5,
     't_max'   : 10,
-    'hop'     : 0.3,
-    'D'       : 3,
+    'hop'     : 0.2,
+    'D'       : 4,
     'opt'     : True,
 }
 
 # choose how the chargers & sensors distributed
 import generate
 distributions = {
-    'charger' : generate.charger.rand,
-    'sensor'  : generate.sensor.rand_trace,
+    'charger' : generate.charger.fixed,
+    'sensor'  : generate.sensor.rand,
     'p_list'  : generate.p_list.rand,
 }
 
-config_name = 'hop = 0.3'
+config_name = 'D = 4'
