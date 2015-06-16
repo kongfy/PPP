@@ -23,16 +23,16 @@ args = {
     't_min'   : 3,
     't_max'   : 3,
     'hop'     : 0.2,
-    'D'       : 3,
+    'D'       : 6,
     'opt'     : True,
 }
 
 # choose how the chargers & sensors distributed
 import generate
 distributions = {
-    'charger' : generate.charger.rand,
-    'sensor'  : generate.sensor.rand_path,
+    'charger' : generate.charger.fixed,
+    'sensor'  : generate.sensor.rand_trace,
     'p_list'  : generate.p_list.rand,
 }
 
-config_name = 'T = 3, a'
+config_name = ''

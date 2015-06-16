@@ -4,6 +4,7 @@ from config import args, distributions, DEBUG, config_name
 from common.function import func_D
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+from matplotlib.lines import Line2D as line
 
 def draw(chargers, sensors, anser):
     fig = plt.figure(figsize = (5, 5))
@@ -18,8 +19,28 @@ def draw(chargers, sensors, anser):
     ax.grid(True)
 
     # sensors & candidate chargers
-    sensors_x = [x for (sid, x, y) in sensors]
-    sensors_y = [y for (sid, x, y) in sensors]
+    sensors_x = []
+    sensors_y = []
+
+    for time_slice in sensors:
+        last = None
+        for sensor, _ in time_slice:
+            _, x, y = sensor
+            sensors_x.append(x)
+            sensors_y.append(y)
+
+            if last:
+                x0, y0 = last
+                ax.annotate('',
+                            xy=(x, y), xycoords='data',
+                            xytext=(x0, y0), textcoords='data',
+                            arrowprops=dict(arrowstyle='-|>',
+                                            color='0.3',
+                                            connectionstyle='arc3'),
+                )
+
+            last = (x, y)
+
     chargers_x = [x for (cid, x, y) in chargers]
     chargers_y = [y for (cid, x, y) in chargers]
     (plt_sensors, plt_chargers) = ax.plot(sensors_x, sensors_y, 'bo',
