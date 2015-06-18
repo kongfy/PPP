@@ -55,7 +55,7 @@ def main():
         print "============================================="
         pprint(anser)
 
-    plot.draw(chargers, sensors, anser)
+    plot.draw_single(chargers, sensors, anser)
 
     """
     anser = solution.solutionRan.solution(chargers, sensors, p_list)
@@ -75,5 +75,27 @@ def main():
         pprint(anser)
     """
 
+def draw_d():
+    # step 2: generate sensors
+    sensors = distributions['sensor']()
+
+    # step 3: generate p_list
+    p_list = distributions['p_list']()
+
+    data = []
+    for d in range(1, 5):
+        args['D'] = d * 2
+        chargers = distributions['charger']()
+        anser = solution.solutionB.solution(chargers, sensors, p_list)
+
+        data.append((chargers, sensors, anser))
+        plot.draw_single(chargers, sensors, anser)
+
+    # plot.draw_multi(data)
+    for _, _, anser in data:
+        print '========================'
+        print anser
+
+
 if __name__ == '__main__':
-    main()
+    draw_d()

@@ -20,10 +20,10 @@ args = {
     'worker'  : 10,              # numbers of worker process
 
     # extension
-    't_min'   : 3,
-    't_max'   : 3,
+    't_min'   : 5,
+    't_max'   : 10,
     'hop'     : 0.2,
-    'D'       : 6,
+    'D'       : 2,
     'opt'     : True,
 }
 
@@ -31,7 +31,7 @@ args = {
 import generate
 distributions = {
     'charger' : generate.charger.fixed,
-    'sensor'  : generate.sensor.rand_trace,
+    'sensor'  : generate.sensor.rand,
     'p_list'  : generate.p_list.rand,
 }
 
