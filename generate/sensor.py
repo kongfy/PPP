@@ -1,11 +1,34 @@
 # -*- coding: utf-8 -*-
 
 from config import args
-from point import add_point_to
 from point import random_point
 
 import random
 import math
+
+def reconfig(sensors, generator, leave = 0, enter = 0):
+    """reconfiguration for sensors"""
+    assert leave >= 0
+    assert leave <= 1
+    assert enter >= 0
+    assert enter <= 1
+
+    m = args['M']
+    size = args['size']
+
+    l = int(leave * m)
+    e = int(enter * m)
+    current = len(sensors)
+
+    if current < l:
+        return sensors
+
+    sensors = sensors[l:]
+
+    temp = generator() # TODO : rand_path() rand_trace() do not make sence here
+    sensors += temp[:e]
+
+    return sensors
 
 def rand():
     """randomly distributed"""

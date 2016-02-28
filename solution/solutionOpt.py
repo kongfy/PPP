@@ -24,10 +24,9 @@ def update(sensors, p_list):
     if temp_Q > g_Q:
         g_Q = temp_Q
         g_result = (copy(g_C), copy(g_H))
-        """
+
         if DEBUG:
             print g_result, g_Q
-        """
 
 
 def solve(chargers, n, cost, sensors, p_list):
