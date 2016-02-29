@@ -19,25 +19,18 @@ args = {
     'times'   : 10,              # repeat times
     'worker'  : 10,              # numbers of worker process
 
-    # extension
-    't_min'   : 5,
-    't_max'   : 10,
-    'hop'     : 0.2,
-    'D'       : 2,
-    'opt'     : True,
-
     # extension 5.1
-    'leave'   : 0.10,
-    'enter'   : 0.10,
-    'F'       : 0.20,
+    'leave'   : 0.05,
+    'enter'   : 0.05,
+    'F'       : 0.70,
 }
 
 # choose how the chargers & sensors distributed
 import generate
 distributions = {
-    'charger' : generate.charger.fixed,
+    'charger' : generate.charger.rand,
     'sensor'  : generate.sensor.rand,
     'p_list'  : generate.p_list.rand,
 }
 
-config_name = ''
+config_name = 'default'
