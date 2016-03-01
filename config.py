@@ -27,15 +27,15 @@ args = {
     'opt'     : True,
 
     # extension 5.1
-    'leave'   : 0.10,
-    'enter'   : 0.10,
-    'F'       : 0.20,
+    'leave'   : 0.15,
+    'enter'   : 0.15,
+    'F'       : 0.00,
 }
 
 # choose how the chargers & sensors distributed
 import generate
 distributions = {
-    'charger' : generate.charger.fixed,
+    'charger' : generate.charger.rand,
     'sensor'  : generate.sensor.rand,
     'p_list'  : generate.p_list.rand,
 }

@@ -9,60 +9,8 @@ from multiprocessing import Pool
 import timeit
 import copy
 
-def worker():
+def worker(chargers, sensors, p_list, sensors_p, p_list_p):
     """worker function, used to create processing"""
-    if DEBUG:
-        print "============================================="
-        print "#                  args                     #"
-        print "============================================="
-        pprint(args)
-
-    # step 1: generate candidate chargers
-    chargers = distributions['charger']()
-    if DEBUG:
-        print "============================================="
-        print "#            candidate chargers             #"
-        print "============================================="
-        print "%d chargers generated:" % (len(chargers))
-        pprint(chargers)
-
-    # step 2: generate sensors
-    sensors = distributions['sensor']()
-    if DEBUG:
-        print "============================================="
-        print "#                 sensors                   #"
-        print "============================================="
-        print "%d sensors generated." % (len(sensors))
-        pprint(sensors)
-
-    # step 3: generate p_list
-    p_list = distributions['p_list']()
-    if DEBUG:
-        print "============================================="
-        print "#                sensor's P                 #"
-        print "============================================="
-        print "%d sensor's P generated." % (len(p_list))
-        pprint(p_list)
-
-    # EXTENSION : reconfiguration
-    sensors_p = copy.copy(sensors)
-    sensors_p = generate.sensor.reconfig(sensors_p, distributions['sensor'], args['leave'], args['enter'])
-    if DEBUG:
-        print "============================================="
-        print "#                sensors'                   #"
-        print "============================================="
-        print "%d sensors' generated." % (len(sensors_p))
-        pprint(sensors_p)
-
-    p_list_p = copy.copy(p_list)
-    p_list_p = generate.p_list.reconfig(p_list_p, distributions['p_list'], args['leave'], args['enter'])
-    if DEBUG:
-        print "============================================="
-        print "#                reconfig P                  #"
-        print "============================================="
-        print "%d sensor's P generated." % (len(p_list))
-        pprint(p_list_p)
-
     result = {}
 
     tic = timeit.default_timer()
@@ -74,7 +22,6 @@ def worker():
         print "#               solution IAA                #"
         print "============================================="
         pprint(anser)
-
 
     tic = timeit.default_timer()
     anser = solution.solutionOpt.solution(chargers, sensors_p, p_list_p)
@@ -88,11 +35,43 @@ def worker():
 
     return result
 
-def main():
+def extension1(chargers, sensors, p_list, G_sensors_p=None, G_p_list_p=None):
     """main function."""
+
+    if G_sensors_p == None:
+        G_sensors_p = []
+        for i in xrange(args['times']):
+            sensors_p = copy.copy(sensors)
+            sensors_p = generate.sensor.reconfig(sensors_p, distributions['sensor'], args['leave'], args['enter'])
+            if DEBUG:
+                print "============================================="
+                print "#                sensors'                   #"
+                print "============================================="
+                print "%d sensors' generated." % (len(sensors_p))
+                pprint(sensors_p)
+            G_sensors_p.append(sensors_p)
+
+    if G_p_list_p == None:
+        G_p_list_p = []
+        for i in xrange(args['times']):
+            p_list_p = copy.copy(p_list)
+            p_list_p = generate.p_list.reconfig(p_list_p, distributions['p_list'], args['leave'], args['enter'])
+            if DEBUG:
+                print "============================================="
+                print "#                reconfig P                  #"
+                print "============================================="
+                print "%d sensor's P generated." % (len(p_list))
+                pprint(p_list_p)
+            G_p_list_p.append(p_list_p)
+
     pool = Pool(args['worker'])
 
-    tasks = [pool.apply_async(worker) for i in xrange(args['times'])]
+    tasks = [pool.apply_async(worker, (copy.copy(chargers),
+                                       copy.copy(sensors),
+                                       copy.copy(p_list),
+                                       sensors_p,
+                                       p_list_p))
+             for sensors_p, p_list_p in zip(G_sensors_p, G_p_list_p)]
 
     pool.close()
     pool.join()
@@ -122,6 +101,3 @@ def main():
     f = open('summary.txt', 'a')
     f.write(config_name + ' : ' + str(final) + '\n')
     f.close()
-
-if __name__ == '__main__':
-    main()
