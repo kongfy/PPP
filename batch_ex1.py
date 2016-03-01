@@ -73,13 +73,10 @@ def main():
             pprint(p_list_p)
         G_p_list_p.append(p_list_p)
 
-    for config in configs():
-        if os.path.exists(config_pyc):
-            os.remove(config_pyc)
-
-        shutil.copy(config, config_filename)
-
-        extension1(copy.deepcopy(chargers),
+    for F in args['F']:
+        extension1(0,
+                   F,
+                   copy.deepcopy(chargers),
                    copy.deepcopy(sensors),
                    copy.deepcopy(p_list),
                    copy.deepcopy(G_sensors_p),

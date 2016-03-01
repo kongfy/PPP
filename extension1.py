@@ -9,12 +9,12 @@ from multiprocessing import Pool
 import timeit
 import copy
 
-def worker(chargers, sensors, p_list, sensors_p, p_list_p):
+def worker(F, chargers, sensors, p_list, sensors_p, p_list_p):
     """worker function, used to create processing"""
     result = {}
 
     tic = timeit.default_timer()
-    anser = reconfiguration.iaa.solution(chargers, sensors, p_list, args['B'], sensors_p, p_list_p, args['F'])
+    anser = reconfiguration.iaa.solution(chargers, sensors, p_list, args['B'], sensors_p, p_list_p, F)
     toc = timeit.default_timer()
     result['IAA'] = (toc - tic, anser)
     if DEBUG:
@@ -35,14 +35,14 @@ def worker(chargers, sensors, p_list, sensors_p, p_list_p):
 
     return result
 
-def extension1(chargers, sensors, p_list, G_sensors_p=None, G_p_list_p=None):
+def extension1(rate, F, chargers, sensors, p_list, G_sensors_p=None, G_p_list_p=None):
     """main function."""
 
     if G_sensors_p == None:
         G_sensors_p = []
         for i in xrange(args['times']):
             sensors_p = copy.copy(sensors)
-            sensors_p = generate.sensor.reconfig(sensors_p, distributions['sensor'], args['leave'], args['enter'])
+            sensors_p = generate.sensor.reconfig(sensors_p, distributions['sensor'], rate, rate)
             if DEBUG:
                 print "============================================="
                 print "#                sensors'                   #"
@@ -55,7 +55,7 @@ def extension1(chargers, sensors, p_list, G_sensors_p=None, G_p_list_p=None):
         G_p_list_p = []
         for i in xrange(args['times']):
             p_list_p = copy.copy(p_list)
-            p_list_p = generate.p_list.reconfig(p_list_p, distributions['p_list'], args['leave'], args['enter'])
+            p_list_p = generate.p_list.reconfig(p_list_p, distributions['p_list'], rate, rate)
             if DEBUG:
                 print "============================================="
                 print "#                reconfig P                  #"
@@ -66,7 +66,8 @@ def extension1(chargers, sensors, p_list, G_sensors_p=None, G_p_list_p=None):
 
     pool = Pool(args['worker'])
 
-    tasks = [pool.apply_async(worker, (copy.copy(chargers),
+    tasks = [pool.apply_async(worker, (F,
+                                       copy.copy(chargers),
                                        copy.copy(sensors),
                                        copy.copy(p_list),
                                        sensors_p,
@@ -99,5 +100,5 @@ def extension1(chargers, sensors, p_list, G_sensors_p=None, G_p_list_p=None):
     pprint(final)
 
     f = open('summary.txt', 'a')
-    f.write(config_name + ' : ' + str(final) + '\n')
+    f.write('rate=%s F=%s' % (rate, F) + ' : ' + str(final) + '\n')
     f.close()
