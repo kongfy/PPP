@@ -20,8 +20,8 @@ args = {
     'worker'  : 10,              # numbers of worker process
 
     # extension 5.1
-    'leave'   : 0.05,
-    'enter'   : 0.05,
+    'leave'   : 0.15,
+    'enter'   : 0.15,
     'F'       : 0.00,
 }
 
