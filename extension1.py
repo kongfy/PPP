@@ -23,15 +23,15 @@ def worker(F, chargers, sensors, p_list, sensors_p, p_list_p):
         print "============================================="
         pprint(anser)
 
-    tic = timeit.default_timer()
-    anser = solution.solutionOpt.solution(chargers, sensors_p, p_list_p)
-    toc = timeit.default_timer()
-    result['Opt'] = (toc - tic, anser)
-    if DEBUG:
-        print "============================================="
-        print "#               solution Opt                #"
-        print "============================================="
-        pprint(anser)
+    # tic = timeit.default_timer()
+    # anser = solution.solutionOpt.solution(chargers, sensors_p, p_list_p)
+    # toc = timeit.default_timer()
+    # result['Opt'] = (toc - tic, anser)
+    # if DEBUG:
+    #     print "============================================="
+    #     print "#               solution Opt                #"
+    #     print "============================================="
+    #     pprint(anser)
 
     return result
 
@@ -102,3 +102,59 @@ def extension1(rate, F, chargers, sensors, p_list, G_sensors_p=None, G_p_list_p=
     f = open('summary.txt', 'a')
     f.write('rate=%s F=%s' % (rate, F) + ' : ' + str(final) + '\n')
     f.close()
+
+if __name__ == '__main__':
+    # step 1: generate candidate chargers
+    chargers = distributions['charger']()
+    if DEBUG:
+        print "============================================="
+        print "#            candidate chargers             #"
+        print "============================================="
+        print "%d chargers generated:" % (len(chargers))
+        pprint(chargers)
+
+    # step 2: generate sensors
+    sensors = distributions['sensor']()
+    if DEBUG:
+        print "============================================="
+        print "#                 sensors                   #"
+        print "============================================="
+        print "%d sensors generated." % (len(sensors))
+        pprint(sensors)
+
+    # step 3: generate p_list
+    p_list = distributions['p_list']()
+    if DEBUG:
+        print "============================================="
+        print "#                sensor's P                 #"
+        print "============================================="
+        print "%d sensor's P generated." % (len(p_list))
+        pprint(p_list)
+
+    # EXTENSION : reconfiguration
+    sensors_p = copy.copy(sensors)
+    sensors_p = generate.sensor.reconfig(sensors_p, distributions['sensor'], args['leave'], args['enter'])
+    if DEBUG:
+        print "============================================="
+        print "#                sensors'                   #"
+        print "============================================="
+        print "%d sensors' generated." % (len(sensors_p))
+        pprint(sensors_p)
+
+    p_list_p = copy.copy(p_list)
+    p_list_p = generate.p_list.reconfig(p_list_p, distributions['p_list'], args['leave'], args['enter'])
+    if DEBUG:
+        print "============================================="
+        print "#                reconfig P                  #"
+        print "============================================="
+        print "%d sensor's P generated." % (len(p_list))
+        pprint(p_list_p)
+
+    worker(
+        0,
+        copy.deepcopy(chargers),
+        copy.deepcopy(sensors),
+        copy.deepcopy(p_list),
+        copy.deepcopy(sensors_p),
+        copy.deepcopy(p_list_p),
+    )
