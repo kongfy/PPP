@@ -33,6 +33,9 @@ def cost(C, H, C_p, H_p):
 
     if DEBUG:
         print "# ********** COST ********** : %d #" % (cost)
+        print C, H
+        print C_p, H_p
+        print "# ********************************#"
     return cost
 
 def solution(chargers, sensors, p_list, B, sensors_p, p_list_p, F):
@@ -42,14 +45,6 @@ def solution(chargers, sensors, p_list, B, sensors_p, p_list_p, F):
 
     F = int(B * F)
     while cost(C, H, C_p, H_p) > F:
-        print cost(C, H, C_p, H_p), F
-        if DEBUG:
-            print "======================================"
-            print "#        result of TCAs'             #"
-            print "======================================"
-            print C, H
-            print C_p, H_p
-
         # op on h
         n_1 = len(C)
         n_2 = len(C_p)
@@ -83,6 +78,7 @@ def solution(chargers, sensors, p_list, B, sensors_p, p_list_p, F):
         if H_p[temp_i] == 0:
             C_p[temp_i: temp_i + 1] = []
             H_p[temp_i: temp_i + 1] = []
+            n_2 = len(C_p)
 
         # random select j
         count = 0
