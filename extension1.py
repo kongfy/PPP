@@ -38,9 +38,6 @@ def worker(F, chargers, sensors, p_list, sensors_p, p_list_p):
 def extension1(rate, F, chargers, sensors, p_list, G_sensors_p=None, G_p_list_p=None):
     """main function."""
 
-    print "============================================="
-    print G_p_list_p
-
     if G_sensors_p == None:
         G_sensors_p = []
         for i in xrange(args['times']):

@@ -41,7 +41,9 @@ def solution(chargers, sensors, p_list, B, sensors_p, p_list_p, F):
 
 
     F = int(B * F)
-    while cost(C, H, C_p, H_p) > F:
+    c = cost(C, H, C_p, H_p)
+    print c, F
+    while c > F:
         if DEBUG:
             print "======================================"
             print "#        result of TCAs'             #"
