@@ -83,8 +83,6 @@ def solution(chargers, sensors, p_list, B, sensors_p, p_list_p, F):
             C_p[temp_i: temp_i + 1] = []
             H_p[temp_i: temp_i + 1] = []
 
-        print "index i: %d" % temp_i
-
         # random select j
         count = 0
         for j in xrange(n_1):
@@ -92,17 +90,12 @@ def solution(chargers, sensors, p_list, B, sensors_p, p_list_p, F):
                 if C_p[i] == C[j]:
                     if H_p[i] < H[j]:
                         count += 1
-                        print j
                     break
             else:
-                print j
                 count += 1
 
         assert count > 0
-        print "---"
-        print count
         count = random.randint(0, count - 1)
-        print count
         temp_j = None
 
         for j in xrange(n_1):

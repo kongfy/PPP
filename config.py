@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # debug output switch
-DEBUG = True
+DEBUG = False
 
 # program arguments
 args = {
