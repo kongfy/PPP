@@ -6,11 +6,11 @@ DEBUG = False
 # program arguments
 args = {
     'size'    : (300, 300),     # (width, height) of 2-D plane
-    'N'       : 20,              # numbers of candidate location/chargers [50, 100]
-    'M'       : 200,             # numbers of sensors [500, 2000]
-    'B'       : 3000,            # power budget [10000, 20000]
+    'N'       : 8,              # numbers of candidate location/chargers [50, 100]
+    'M'       : 50,             # numbers of sensors [500, 2000]
+    'B'       : 800,            # power budget [10000, 20000]
     'p_min'   : float(50),
-    'h_max'   : 6,
+    'h_max'   : 4,
     'p_th'    : float(0.01),
     'alpha'   : float(0.64),
     'beta'    : float(30),
@@ -29,7 +29,7 @@ args = {
     # extension 5.1
     'leave'   : 0.15,
     'enter'   : 0.15,
-    'F'       : [5, 10, 15, 20, 25, 30, 35, 40],
+    'F'       : [2, 4, 6, 8, 10, 12],
 }
 
 # choose how the chargers & sensors distributed
