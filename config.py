@@ -29,7 +29,8 @@ args = {
     # extension 5.1
     'leave'   : 0.15,
     'enter'   : 0.15,
-    'F'       : [2, 4, 6, 8, 10, 12],
+    'rates'   : [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35],
+    'F'       : 8,
 }
 
 # choose how the chargers & sensors distributed

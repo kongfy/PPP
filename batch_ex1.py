@@ -47,40 +47,14 @@ def main():
         print "%d sensor's P generated." % (len(p_list))
         pprint(p_list)
 
-    # EXTENSION : reconfiguration
-    G_sensors_p = []
-    for i in xrange(args['times']):
-        sensors_p = copy.copy(sensors)
-        sensors_p = generate.sensor.reconfig(sensors_p, distributions['sensor'], args['leave'], args['enter'])
-        if DEBUG:
-            print "============================================="
-            print "#                sensors'                   #"
-            print "============================================="
-            print "%d sensors' generated." % (len(sensors_p))
-            pprint(sensors_p)
-        G_sensors_p.append(sensors_p)
-
-
-    G_p_list_p = []
-    for i in xrange(args['times']):
-        p_list_p = copy.copy(p_list)
-        p_list_p = generate.p_list.reconfig(p_list_p, distributions['p_list'], args['leave'], args['enter'])
-        if DEBUG:
-            print "============================================="
-            print "#                reconfig P                  #"
-            print "============================================="
-            print "%d sensor's P generated." % (len(p_list))
-            pprint(p_list_p)
-        G_p_list_p.append(p_list_p)
-
-    for F in args['F']:
-        extension1(0,
-                   F,
+    for rate in args['rates']:
+        extension1(rate,
+                   args['F'],
                    copy.deepcopy(chargers),
                    copy.deepcopy(sensors),
                    copy.deepcopy(p_list),
-                   copy.deepcopy(G_sensors_p),
-                   copy.deepcopy(G_p_list_p),
+                   None,
+                   None,
         )
 
 if __name__ == '__main__':
