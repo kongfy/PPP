@@ -38,12 +38,12 @@ def cost(C, H, C_p, H_p):
         print "# ********************************#"
     return cost
 
-def solution(chargers, sensors, p_list, B, sensors_p, p_list_p, F):
+def solution(chargers, sensors, p_list, B, sensors_p, p_list_p, F, p_min):
     Q, C, H = TCA(chargers, sensors, p_list)
     Q_p, C_p, H_p = TCA(chargers, sensors_p, p_list_p)
 
 
-    F = int(B * F)
+    #F = int(B * F / p_min)
     while cost(C, H, C_p, H_p) > F:
         # op on h
         n_1 = len(C)

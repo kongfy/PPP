@@ -14,7 +14,7 @@ def worker(F, chargers, sensors, p_list, sensors_p, p_list_p):
     result = {}
 
     tic = timeit.default_timer()
-    anser = reconfiguration.iaa.solution(chargers, sensors, p_list, args['B'], sensors_p, p_list_p, F)
+    anser = reconfiguration.iaa.solution(chargers, sensors, p_list, args['B'], sensors_p, p_list_p, F, args['p_min'])
     toc = timeit.default_timer()
     result['IAA'] = (toc - tic, anser)
     if DEBUG:
